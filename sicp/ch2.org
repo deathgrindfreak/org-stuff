@@ -22,12 +22,15 @@ just writing folds in the first place) actually came from the
 previously mentioned paper.  All a fold (right fold) does on a list is
 replace every 'cons' in the list with the function that is being
 folded with and the final 'nil' with the initial element.  For
-example, fold + 0 '(1 2 3) transforms the list like so:
+example, src_scheme{fold + 0 '(1 2 3)} transforms the list like so:
 
+#+BEGIN_SRC scheme
 (cons 1 (cons 2 (cons 3 '()))) -> (+ 1 (+ 2 (+ 3 0))).
+#+END_SRC
 
-In the first expression, we merely want to replace every 'cons x' with
-a 'cons (p x)'.  Show the resulting expression is:
+In the first expression, we merely want to replace every
+src_scheme{cons x} with a 'cons (p x)'. Show the resulting expression
+is:
 
 #+BEGIN_SRC scheme
 (define (map p sequence)
@@ -340,3 +343,4 @@ I'm pretty happy with the way it performs (it can generate the 10x10
 solution in a second or so), so I'll stand behind it. 
 
 **** Exercise 2.43
+     
