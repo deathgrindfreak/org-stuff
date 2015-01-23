@@ -22,14 +22,14 @@ just writing folds in the first place) actually came from the
 previously mentioned paper.  All a fold (right fold) does on a list is
 replace every 'cons' in the list with the function that is being
 folded with and the final 'nil' with the initial element.  For
-example, src_scheme{fold + 0 '(1 2 3)} transforms the list like so:
+example, 'fold + 0 '(1 2 3) transforms the list like so:
 
 #+BEGIN_SRC scheme
-(cons 1 (cons 2 (cons 3 '()))) -> (+ 1 (+ 2 (+ 3 0))).
+(cons 1 (cons 2 (cons 3 '()))) -> (+ 1 (+ 2 (+ 3 0)))
 #+END_SRC
 
 In the first expression, we merely want to replace every
-src_scheme{cons x} with a 'cons (p x)'. Show the resulting expression
+'cons x' with a 'cons (p x)'. Show the resulting expression
 is:
 
 #+BEGIN_SRC scheme
@@ -60,7 +60,7 @@ conses in the list in order to perform the fold.  The following should
 do the trick:
 
 #+BEGIN_SRC scheme
-define (horner-eval x coefficient-sequence)
+(define (horner-eval x coefficient-sequence)
   (accumulate (lambda (this-coeff higher-terms)
                 (+ this-coeff
                    (* x
@@ -95,7 +95,7 @@ accumulate function, the pass the result of mapping the cdr to the
 sequence of sequences to the accumulate-n function (consing these two
 in the process).  Add, rinse, repeat.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (accumulate-n op init seqs)
   (if (null? (car seqs))
       nil
@@ -110,7 +110,7 @@ operations.
 In order to define the matrix-vector product, we need to map the
 vector to every row of the matrix and perform a dot product.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (matrix-*-vector m v)
   (map (lambda (w) (dot-product v w)) m))
 #+END_SRC
@@ -118,7 +118,7 @@ vector to every row of the matrix and perform a dot product.
 For the next operation, we need to cons each element in each row of
 the matrix, with elements in other rows in the same column.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (transpose mat)
   (accumulate-n cons nil mat))
 #+END_SRC
@@ -128,7 +128,7 @@ product, we simply need to transform the matrix to the right, then map
 each row in the left, to a dot product with each row in the now
 transposed matrix to the right.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (matrix-*-matrix m n)
   (let ((cols (transpose n)))
     (map (lambda (row-m)
@@ -141,19 +141,26 @@ transposed matrix to the right.
 **** Exercise 2.38
 The values for the expressions are:
 
+#+BEGIN_SRC scheme
 (fold-right / 1 (list 1 2 3)) => (/ 1 (/ 2 (/ 3 1))) => 3/2
 (fold-left / 1 (list 1 2 3)) => (/ (/ (/ 1 1) 2) 3) => 3/2
 (fold-right list nil (list 1 2 3)) => (list 1 (list 2 (list 3 nil)))
 (fold-left list nil (list 1 2 3)) => (list (list (list 1 nil) 2) 3)
+#+END_SRC
 
 From the expressions above, we see that the types of expressions that
 are invariant over folds tend to be those that are commutative. The
-above example for is actually a bit of a misnomer since (fold-left / 2
-'(1 2 3 4) => 1/12 != 3/4 <= (fold-right / 2 '(1 2 3 4)). However,
-using + we can see that:
+above example for is actually a bit of a misnomer since 
 
-(fold-left + 1 '(1 2 3 4)) => (+ (+ (+ (+ 1 1) 2) 3) 4) =
-(+ 4 (+ 3 (+ 2 (+ 1 1)))) <= (fold-right + 1 '(1 2 3 4))
+#+BEGIN_SRC scheme
+(fold-left / 2 '(1 2 3 4) => 1/12 != 3/4 <= (fold-right / 2 '(1 2 3 4))
+#+END_SRC
+
+However, using + we can see that:
+
+#+BEGIN_SRC scheme
+(fold-left + 1 '(1 2 3 4)) => (+ (+ (+ (+ 1 1) 2) 3) 4) = (+ 4 (+ 3 (+ 2 (+ 1 1)))) <= (fold-right + 1 '(1 2 3 4))
+#+END_SRC
 
 This is of course due to the fact that (+ a b) == (+ b a). thus for
 all all op such that (op a b) == (op b a), foldr will produce the same
@@ -170,7 +177,7 @@ In order to reverse the entire list, at each step in the fold we can
 simply reverse the order of the parameters to the lambda function and
 cons them.
 
-#+BEGIN_SRC 
+#+BEGIN_SRC scheme
 (define (reverse sequence)
   (fold-right (lambda (x y) (cons y x)) nil sequence))
 #+END_SRC 
@@ -181,7 +188,7 @@ argument of op with the next element of the list into the left
 argument, if we instead use list with the arguments reversed, we gain
 the desired procedure (that's one hell of a run-on sentence).
 
-#+BEGIN_SRC 
+#+BEGIN_SRC scheme
 (define (reverse sequence)
   (fold-left (lambda (x y) (list y x)) nil sequence))
 #+END_SRC 
@@ -195,7 +202,7 @@ I'm not completely sure why they stuck this one in here, mainly since
 they did the work for us at the very beginning of the sub-section
 (perhaps to further illustrate the power of modular programs).
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (unique-pairs n)
   (flatmap (lambda (i)
              (map (lambda (j)
@@ -206,7 +213,7 @@ they did the work for us at the very beginning of the sub-section
 
 And prime-pairs becomes:
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (prime-sum-pairs n)
   (map make-pair-sum
        (filter prime-sum? (unique-pairs n)))))
@@ -217,7 +224,7 @@ You can guess the structure of this one pretty easily, though it
 unintuitively (at least for me at first) requires two flatmaps, with
 the last one being the only normal map.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (unique-triples n)
   (flatmap (lambda (i)
              (flatmap (lambda (j)
@@ -256,7 +263,7 @@ the board.
 For the empty board representation, we simply need a list of the null
 list.  Thus the following definition works nicely:
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define empty-board nil)
 #+END_SRC
 
@@ -264,7 +271,7 @@ Next, the safe? method needs to check all of the columns and diagonals
 in the previous rows for any intersections (the way the rows are
 generated guarantees that there will be no conflict there).
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (safe? k positions)
   (define (ones-position row)
     (if (= 1 (car row))
@@ -308,7 +315,7 @@ function. All adjoin-positions needs to really do is cons new rows
 with every possible queen position onto the existing partially-formed
 boards.
 
-#+BEGIN_SRC
+#+BEGIN_SRC scheme
 (define (queens board-size)
   
   (define (adjoin-position new-row k rest-of-queens)
