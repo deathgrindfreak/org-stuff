@@ -350,4 +350,16 @@ I'm pretty happy with the way it performs (it can generate the 10x10
 solution in a second or so), so I'll stand behind it. 
 
 **** Exercise 2.43
+***** TODO 
+
+** 2.2.4 Example: A Picture Language
+   
+*** The picture language
+**** Exercise 2.44
      
+*** Higher-order operations
+**** Exercise 2.45
+     
+*** Frames
+**** Exercise 2.46
+**** Exercise 3.47

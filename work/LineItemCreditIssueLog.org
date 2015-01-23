@@ -83,6 +83,10 @@
 
 *** TODO I believe that a document must have at least one LIC before saving.  If so, we'll need to provide some validation.
 *** TODO Saving a doc causes the save prompts for the leaving the current doc on tree and hitting the back button to pop up
+
+*** TODO Line Item Credits, ACD and Comment aren't currently saved in the DB upon refeshing the page.  Also, Customer Name is generated on search somehow and not save.
+*** TODO Need to check on how all computed amounts are calculated and added to the table and header fields.
+*** TODO Order of elements in the search table isn't preserved on screen change.
     
 
 * Issues Log for Line Item Credit System
