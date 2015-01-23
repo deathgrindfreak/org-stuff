@@ -1,0 +1,21 @@
+* Various topics for learning
+  
+** Misc
+*** TODO Create a personal wiki using org-mode: [[http://orgmode.org/worg/org-contrib/babel][babel mode]] 
+    Mainly for documenting the journey through TAOCP and SICP
+*** TODO Investigate embedded eclim mode for editing
+*** TODO Look into git mode in emacs
+*** TODO Setup w3m browser in emacs and figure out proxy settings.
+
+  
+** Java
+*** TODO Learn more about annotations
+*** TODO Learn more about Vaadin
+
+    
+** Scheme
+*** TODO Continue reading SICP
+*** TODO Read more on the Scheme in Fixnum days book
+*** TODO Write an implementation for a tree as well as fold and map functions for it
+*** TODO Also, implement some of the functions shown in "Why Functional Programming Matters."
+*** TODO Finish Sieve of Eratosthenes implementation for the Project Euler module
