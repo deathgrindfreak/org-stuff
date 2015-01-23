@@ -208,7 +208,7 @@ they did the work for us at the very beginning of the sub-section
              (map (lambda (j)
                     (list i j))
                   (enumerate-interval 1 (- i 1))))
-           (enumerate-interval 1 n))))
+           (enumerate-interval 1 n)))
 #+END_SRC
 
 And prime-pairs becomes:
@@ -216,7 +216,7 @@ And prime-pairs becomes:
 #+BEGIN_SRC scheme
 (define (prime-sum-pairs n)
   (map make-pair-sum
-       (filter prime-sum? (unique-pairs n)))))
+       (filter prime-sum? (unique-pairs n))))
 #+END_SRC
 
 **** Exercise 2.41
