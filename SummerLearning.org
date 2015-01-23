@@ -1,0 +1,150 @@
+* Learning for the Summer
+  
+Topics that I'll hopefully knock out during the 2014 summer break.  If
+not, there's always the Fall ...
+
+** Learn more about org-mode
+
+The org mode site is located [[http://orgmode.org/org.html][here]] and The David O' Toole tutorial is
+[[http://orgmode.org/worg/org-tutorials/orgtutorial_dto.html][here]].  Also some info on blogging with org-mode is [[http://emacs-fu.blogspot.com/2009/05/writing-and-blogging-with-org-mode.html][here]].
+
+** xv6
+
+Xv6 can be found [[http://pdos.csail.mit.edu/6.828/2012/xv6.html][here]] and the book and reference are [[docview:~/downloads/book-rev7.pdf::1][here]] and [[docview:~/downloads/xv6-rev7.pdf::1][here]].
+
+** Finish "The C Programming Language"
+   
+Finish reading the final chapters of [[docview:~/ownCloud/books/%5BBrian_W._Kernighan,_Dennis_M._Ritchie%5D_The__C_Pro(BookFi.org).pdf::1]["The C Programming Language"]] 
+
+** Finish "Learn You a Haskell For Great Good"
+   
+Knock out a good part of [[docview:~/ownCloud/books/Learn%20You%20a%20Haskell%20for%20Great%20Good%20-%20Lipovaca%20-%20No%20Starch%20(2011).pdf::1]["Learn You a Haskell For Great Good"]].  Also
+check the [[https://github.com/chrisdone/haskell-style-guide][the haskell style guide]] as well as learn to use
+[[https://github.com/chrisdone/structured-haskell-mode][structured haskell mode]] in order to keep the code nice and pretty.
+[[http://tim.dysinger.net/posts/2014-02-18-haskell-with-emacs.html][This]] blog also has some good info on coding haskell in emacs.
+
+** Read "Programming in Scala"
+   
+Start reading [[docview:~/ownCloud/books/programming%20in%20scala.pdf::1]["Programming in Scala"]] 
+
+** Learn some deeper stuff/Productivity/Sanity keeping stuff about Java
+   
+[[docview:~/downloads/Effective.Java.2nd.Edition.May.2008.3000th.Release.pdf::1][Effective Java]] is probably the best book to start with, since it
+should effectively expand my knowledge on the subject.
+   
+This is about as open-ended as you can get, but a good start might be
+learning [[http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html][maven]], [[http://www.emacswiki.org/emacs/MalabarMode][malabar-mode]] and [[http://www.skybert.net/emacs/java/][emacs-eclim]]. Also giving [[docview:~/ownCloud/books/%5BKen_Arnold,_James_Gosling,_David_Holmes%5D_The_Java(BookFi.org).pdf::1]["The Java Programming Language"]] a go might help as well.  
+
+** Learn gdb
+   
+The best gdb tutorial that I've found is [[http://web.archive.org/web/20080516080255/http://dirac.org/linux/gdb/02a-Memory_Layout_And_The_Stack.php#thesymboltable][here]], and the official site
+is [[http://www.sourceware.org/gdb/][here]] and RMS's tutorial is [[http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html][here]].
+
+** Data Structures and Algorithms
+   
+[[docview:~/ownCloud/books/%5BDonald_E._Knuth%5D_The_Art_of_Computer_Programming,(BookFi.org).pdf::1][The Art of Computer Programming]] is probably the best place to start,
+other than what's stated below.
+   
+Thomas Cormen's [[docview:~/ownCloud/books/%5BThomas_H._Cormen,_Charles_E._Leiserson,_Ronald_L.(BookFi.org).pdf::1]["Introduction to Algorithms"]] is probably the best book
+I know for this.  However there's also [[https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf][this]] book on purely functional
+data structures that I found as well. 
+
+** Finish sudoku game
+
+[[~/bin/random/school/c/sudoku/][Project Folder]]
+
+*** Things to work on/fix
+    
+- Fix the proper Min and Max variables for terminal size
+- Add transformation function to properly transform a current board
+  into a new one.
+- Make the ability to save the current game (should be a fixed mode,
+  possibly under the difficulty display)
+- In save file, first bit should be save mode (y/n), second two bits
+  should be difficulty and the rest should be the previous board.
+- Need error checking function (for improper move) as well as one for
+  checking for a won board
+- Future version should have a few command line arguments
+- Add the ability to install/uninstall program in makefile
+- Look into seeing how to check for changes in header file for MAKE
+
+** Learn Clojure
+   
+[[http://www.braveclojure.com/][This]] website looks to be an extremely promising introduction to the
+language.  Also [[http://4clojure.com][4Clojure]] is an excellent resource for learning to
+program in clojure.
+   
+It's doubtful I'll have time, but a look at [[docview:~/ownCloud/books/%5BChas_Emerick,_Brian_Carper,_Christophe_Grand%5D_Clo(BookFi.org).pdf::1]["Clojure Programming"]]
+might be nice.
+
+** x86 assembly and perhaps some MIPS
+   
+A free book on x86 called [[docview:~/ownCloud/books/Programming_From_The_Ground_Up.pdf::2]["Programming From The Ground Up"]] sounds like
+it could be interesting.  Also, a wikibooks tutorial can be found [[http://en.wikibooks.org/wiki/X86_Assembly][here]] and
+a general resource website [[http://learn86.awardspace.co.uk/][here]]. A tutorial by the university of
+virginia can also be found [[http://www.cs.virginia.edu/~evans/cs216/guides/x86.html][here]].  A good introduction to MIPS can be found [[http://chortle.ccsu.edu/AssemblyTutorial/index.html][here]]. 
+
+** Learn some Regex
+   
+The book I've been reading called [[docview:~/ownCloud/books/%5BDale_Dougherty,_Arnold_Robbins%5D_Sed__Awk(BookFi.org).pdf::1]["Sed and Awk"]] is here.
+ 
+** Brush up on Bash skills
+   
+Need to continue reading [[docview:~/ownCloud/bashguide.pdf::1]["The Bash Guide"]]. 
+
+** Possibly learn Jinja2 or another embedded python template
+   
+The official guide is located [[http://jinja.pocoo.org/docs/intro/][here]].
+
+** Convert Riff to Haskell
+   
+[[~/bin/riff/][Project Folder]]
+
+*** Things to do/fix
+    
+- Set the form type to only allow certain values to be inputted
+- Replace inputting into arrays with fields instead.  This should get
+  rid of some of the weird behavior with the header printing.
+- Make sure that ALL special characters are able to inputted (or
+  restricted) into the appropriate label.  I.E., whitespace and
+  underscore for project title.
+- Fix tuning issues - Input doesn't allow user to enter one letter
+  only (i.e. without accidentals), it simply moves back to the skipped 
+  space, inputs the letter and locks down.  Also doesn't allow an
+  accidental on eighth string when using an 8 string mode.  Need to
+  also allow users to input lower case characters in the first slot,
+  where they will be replaced by the upper case value.
+- Also need to ensure that user has entered a proper tuning for the
+  number of strings declared.
+- Ensure that label arrays are filling properly and print to the
+  header when the "OK" button is pressed.  The "CANCEL" button should
+  leave the defaults where they are.
+- Need to set the proper x-values whenever the user decides to edit
+  the header data.
+- Fix the "Tabbed by" and "Email" labels on the header.  They should
+  have some more sensible default values than what they have now.
+- Create a "mutt-like" event bar down at the bottom.  Should display
+  any error messages, total tab length, current line number and have a
+  "vim-like" input mode for things like bringing up the title window
+  to edit header labels, saving the file to whatever database I'll
+  have to cook up and possibly exporting to a text file, etc...
+- Also have a help option that shows default key-mappings
+- Screen should have the ability to scroll, but only if user has
+  inputted enough data.
+- Need a database that saves and loads a previous tab.  Would like to
+  have a menu select window and possibly have a command line option
+  that opens a tab by name.
+- The ability to add comments to the top of a staff would be cool as well.
+
+** Read the rest of SICP
+
+Finish reading found online [[https://mitpress.mit.edu/sicp/full-text/book/book.html][here]]
+
+** Finish the nand2tetris course
+   
+The course website is located [[http://www.nand2tetris.org/][here]]
+
+** Learn some elisp
+
+The [[https://www.gnu.org/software/emacs/manual/html_node/elisp/][official GNU Elisp guide]] should be a good start in getting used to
+elisp.  Also some [[http://bzg.fr/learn-emacs-lisp-in-15-minutes.html][blog]]s [[http://ergoemacs.org/emacs/elisp.html][and]] [[http://ergoemacs.org/emacs/elisp.html][other]] [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][sites]] should be helpful as well.

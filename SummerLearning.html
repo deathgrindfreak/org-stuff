@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>SummerLearning</title>
+<link rel="shortcut icon" type="image/gif" href="images/pentagram.jpg" />
+<!-- 2014-05-22 Thu 15:41 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="deathgrindfreak" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">SummerLearning</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Learning for the Summer</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Learn more about org-mode</a></li>
+<li><a href="#sec-1-2">1.2. xv6</a></li>
+<li><a href="#sec-1-3">1.3. Finish "The C Programming Language"</a></li>
+<li><a href="#sec-1-4">1.4. Finish "Learn You a Haskell For Great Good"</a></li>
+<li><a href="#sec-1-5">1.5. Read "Programming in Scala"</a></li>
+<li><a href="#sec-1-6">1.6. Learn some deeper stuff/Productivity/Sanity keeping stuff about Java</a></li>
+<li><a href="#sec-1-7">1.7. Learn gdb</a></li>
+<li><a href="#sec-1-8">1.8. Data Structures and Algorithms</a></li>
+<li><a href="#sec-1-9">1.9. Finish sudoku game</a>
+<ul>
+<li><a href="#sec-1-9-1">1.9.1. Things to work on/fix</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-10">1.10. Learn Clojure</a></li>
+<li><a href="#sec-1-11">1.11. x86 assembly and perhaps some MIPS</a></li>
+<li><a href="#sec-1-12">1.12. Learn some Regex</a></li>
+<li><a href="#sec-1-13">1.13. Brush up on Bash skills</a></li>
+<li><a href="#sec-1-14">1.14. Possibly learn Jinja2 or another embedded python template</a></li>
+<li><a href="#sec-1-15">1.15. Convert Riff to Haskell</a>
+<ul>
+<li><a href="#sec-1-15-1">1.15.1. Things to do/fix</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-16">1.16. Read the rest of SICP</a></li>
+<li><a href="#sec-1-17">1.17. Finish the nand2tetris course</a></li>
+<li><a href="#sec-1-18">1.18. Learn some elisp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Learning for the Summer</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Topics that I'll hopefully knock out during the 2014 summer break.  If
+not, there's always the Fall &#x2026;
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Learn more about org-mode</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The org mode site is located <a href="http://orgmode.org/org.html">here</a> and The David O' Toole tutorial is
+<a href="http://orgmode.org/worg/org-tutorials/orgtutorial_dto.html">here</a>.  Also some info on blogging with org-mode is <a href="http://emacs-fu.blogspot.com/2009/05/writing-and-blogging-with-org-mode.html">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> xv6</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Xv6 can be found <a href="http://pdos.csail.mit.edu/6.828/2012/xv6.html">here</a> and the book and reference are <a href="file:///home/deathgrindfreak/downloads/book-rev7.pdf">here</a> and <a href="file:///home/deathgrindfreak/downloads/xv6-rev7.pdf">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Finish "The C Programming Language"</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Finish reading the final chapters of <a href="file:///home/deathgrindfreak/ownCloud/books/%5BBrian_W._Kernighan,_Dennis_M._Ritchie%5D_The__C_Pro(BookFi.org).pdf">"The C Programming Language"</a> 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Finish "Learn You a Haskell For Great Good"</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Knock out a good part of <a href="file:///home/deathgrindfreak/ownCloud/books/Learn%20You%20a%20Haskell%20for%20Great%20Good%20-%20Lipovaca%20-%20No%20Starch%20(2011).pdf">"Learn You a Haskell For Great Good"</a>.  Also
+check the <a href="https://github.com/chrisdone/haskell-style-guide">the haskell style guide</a> as well as learn to use
+<a href="https://github.com/chrisdone/structured-haskell-mode">structured haskell mode</a> in order to keep the code nice and pretty.
+<a href="http://tim.dysinger.net/posts/2014-02-18-haskell-with-emacs.html">This</a> blog also has some good info on coding haskell in emacs.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Read "Programming in Scala"</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Start reading <a href="file:///home/deathgrindfreak/ownCloud/books/programming%20in%20scala.pdf">"Programming in Scala"</a> 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Learn some deeper stuff/Productivity/Sanity keeping stuff about Java</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+<a href="file:///home/deathgrindfreak/downloads/Effective.Java.2nd.Edition.May.2008.3000th.Release.pdf">Effective Java</a> is probably the best book to start with, since it
+should effectively expand my knowledge on the subject.
+</p>
+
+<p>
+This is about as open-ended as you can get, but a good start might be
+learning <a href="http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html">maven</a>, <a href="http://www.emacswiki.org/emacs/MalabarMode">malabar-mode</a> and <a href="http://www.skybert.net/emacs/java/">emacs-eclim</a>. Also giving <a href="file:///home/deathgrindfreak/ownCloud/books/%5BKen_Arnold,_James_Gosling,_David_Holmes%5D_The_Java(BookFi.org).pdf">"The Java Programming Language"</a> a go might help as well.  
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Learn gdb</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+The best gdb tutorial that I've found is <a href="http://web.archive.org/web/20080516080255/http://dirac.org/linux/gdb/02a-Memory_Layout_And_The_Stack.php#thesymboltable">here</a>, and the official site
+is <a href="http://www.sourceware.org/gdb/">here</a> and RMS's tutorial is <a href="http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> Data Structures and Algorithms</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+<a href="file:///home/deathgrindfreak/ownCloud/books/%5BDonald_E._Knuth%5D_The_Art_of_Computer_Programming,(BookFi.org).pdf">The Art of Computer Programming</a> is probably the best place to start,
+other than what's stated below.
+</p>
+
+<p>
+Thomas Cormen's <a href="file:///home/deathgrindfreak/ownCloud/books/%5BThomas_H._Cormen,_Charles_E._Leiserson,_Ronald_L.(BookFi.org).pdf">"Introduction to Algorithms"</a> is probably the best book
+I know for this.  However there's also <a href="https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf">this</a> book on purely functional
+data structures that I found as well. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-9" class="outline-3">
+<h3 id="sec-1-9"><span class="section-number-3">1.9</span> Finish sudoku game</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+<a href="file:///home/deathgrindfreak/bin/random/school/c/sudoku/">Project Folder</a>
+</p>
+</div>
+
+<div id="outline-container-sec-1-9-1" class="outline-4">
+<h4 id="sec-1-9-1"><span class="section-number-4">1.9.1</span> Things to work on/fix</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<ul class="org-ul">
+<li>Fix the proper Min and Max variables for terminal size
+</li>
+<li>Add transformation function to properly transform a current board
+into a new one.
+</li>
+<li>Make the ability to save the current game (should be a fixed mode,
+possibly under the difficulty display)
+</li>
+<li>In save file, first bit should be save mode (y/n), second two bits
+should be difficulty and the rest should be the previous board.
+</li>
+<li>Need error checking function (for improper move) as well as one for
+checking for a won board
+</li>
+<li>Future version should have a few command line arguments
+</li>
+<li>Add the ability to install/uninstall program in makefile
+</li>
+<li>Look into seeing how to check for changes in header file for MAKE
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-10" class="outline-3">
+<h3 id="sec-1-10"><span class="section-number-3">1.10</span> Learn Clojure</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+<a href="http://www.braveclojure.com/">This</a> website looks to be an extremely promising introduction to the
+language.  Also <a href="http://4clojure.com">4Clojure</a> is an excellent resource for learning to
+program in clojure.
+</p>
+
+<p>
+It's doubtful I'll have time, but a look at <a href="file:///home/deathgrindfreak/ownCloud/books/%5BChas_Emerick,_Brian_Carper,_Christophe_Grand%5D_Clo(BookFi.org).pdf">"Clojure Programming"</a>
+might be nice.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-11" class="outline-3">
+<h3 id="sec-1-11"><span class="section-number-3">1.11</span> x86 assembly and perhaps some MIPS</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+A free book on x86 called <a href="file:///home/deathgrindfreak/ownCloud/books/Programming_From_The_Ground_Up.pdf">"Programming From The Ground Up"</a> sounds like
+it could be interesting.  Also, a wikibooks tutorial can be found <a href="http://en.wikibooks.org/wiki/X86_Assembly">here</a> and
+a general resource website <a href="http://learn86.awardspace.co.uk/">here</a>. A tutorial by the university of
+virginia can also be found <a href="http://www.cs.virginia.edu/~evans/cs216/guides/x86.html">here</a>.  A good introduction to MIPS can be found <a href="http://chortle.ccsu.edu/AssemblyTutorial/index.html">here</a>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-12" class="outline-3">
+<h3 id="sec-1-12"><span class="section-number-3">1.12</span> Learn some Regex</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+The book I've been reading called <a href="file:///home/deathgrindfreak/ownCloud/books/%5BDale_Dougherty,_Arnold_Robbins%5D_Sed__Awk(BookFi.org).pdf">"Sed and Awk"</a> is here.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-13" class="outline-3">
+<h3 id="sec-1-13"><span class="section-number-3">1.13</span> Brush up on Bash skills</h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+Need to continue reading <a href="file:///home/deathgrindfreak/ownCloud/bashguide.pdf">"The Bash Guide"</a>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-14" class="outline-3">
+<h3 id="sec-1-14"><span class="section-number-3">1.14</span> Possibly learn Jinja2 or another embedded python template</h3>
+<div class="outline-text-3" id="text-1-14">
+<p>
+The official guide is located <a href="http://jinja.pocoo.org/docs/intro/">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-15" class="outline-3">
+<h3 id="sec-1-15"><span class="section-number-3">1.15</span> Convert Riff to Haskell</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+<a href="file:///home/deathgrindfreak/bin/riff/">Project Folder</a>
+</p>
+</div>
+
+<div id="outline-container-sec-1-15-1" class="outline-4">
+<h4 id="sec-1-15-1"><span class="section-number-4">1.15.1</span> Things to do/fix</h4>
+<div class="outline-text-4" id="text-1-15-1">
+<ul class="org-ul">
+<li>Set the form type to only allow certain values to be inputted
+</li>
+<li>Replace inputting into arrays with fields instead.  This should get
+rid of some of the weird behavior with the header printing.
+</li>
+<li>Make sure that ALL special characters are able to inputted (or
+restricted) into the appropriate label.  I.E., whitespace and
+underscore for project title.
+</li>
+<li>Fix tuning issues - Input doesn't allow user to enter one letter
+only (i.e. without accidentals), it simply moves back to the skipped 
+space, inputs the letter and locks down.  Also doesn't allow an
+accidental on eighth string when using an 8 string mode.  Need to
+also allow users to input lower case characters in the first slot,
+where they will be replaced by the upper case value.
+</li>
+<li>Also need to ensure that user has entered a proper tuning for the
+number of strings declared.
+</li>
+<li>Ensure that label arrays are filling properly and print to the
+header when the "OK" button is pressed.  The "CANCEL" button should
+leave the defaults where they are.
+</li>
+<li>Need to set the proper x-values whenever the user decides to edit
+the header data.
+</li>
+<li>Fix the "Tabbed by" and "Email" labels on the header.  They should
+have some more sensible default values than what they have now.
+</li>
+<li>Create a "mutt-like" event bar down at the bottom.  Should display
+any error messages, total tab length, current line number and have a
+"vim-like" input mode for things like bringing up the title window
+to edit header labels, saving the file to whatever database I'll
+have to cook up and possibly exporting to a text file, etc&#x2026;
+</li>
+<li>Also have a help option that shows default key-mappings
+</li>
+<li>Screen should have the ability to scroll, but only if user has
+inputted enough data.
+</li>
+<li>Need a database that saves and loads a previous tab.  Would like to
+have a menu select window and possibly have a command line option
+that opens a tab by name.
+</li>
+<li>The ability to add comments to the top of a staff would be cool as well.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-16" class="outline-3">
+<h3 id="sec-1-16"><span class="section-number-3">1.16</span> Read the rest of SICP</h3>
+<div class="outline-text-3" id="text-1-16">
+<p>
+Finish reading found online <a href="https://mitpress.mit.edu/sicp/full-text/book/book.html">here</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-17" class="outline-3">
+<h3 id="sec-1-17"><span class="section-number-3">1.17</span> Finish the nand2tetris course</h3>
+<div class="outline-text-3" id="text-1-17">
+<p>
+The course website is located <a href="http://www.nand2tetris.org/">here</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-18" class="outline-3">
+<h3 id="sec-1-18"><span class="section-number-3">1.18</span> Learn some elisp</h3>
+<div class="outline-text-3" id="text-1-18">
+<p>
+The <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/">official GNU Elisp guide</a> should be a good start in getting used to
+elisp.  Also some <a href="http://bzg.fr/learn-emacs-lisp-in-15-minutes.html">blog</a>s <a href="http://ergoemacs.org/emacs/elisp.html">and</a> <a href="http://ergoemacs.org/emacs/elisp.html">other</a> <a href="https://www.gnu.org/software/emacs/manual/html_node/eintr/">sites</a> should be helpful as well.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: deathgrindfreak</p>
+<p class="date">Created: 2014-05-22 Thu 15:41</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

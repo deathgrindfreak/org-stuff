@@ -1,0 +1,33 @@
+MY PROJECTS  -*- mode: org; fill-column: 78 -*-
+
+* Tasks
+#+CATEGORY: Tasks
+
+
+* Sample project milestone
+#+CATEGORY: MilestoneX
+  DEADLINE: 
+
+
+* School
+#+CATEGORY: School
+* Health
+#+CATEGORY: Health
+* Finances
+#+CATEGORY: Finance
+* Miscellaneous
+#+CATEGORY: Misc
+
+
+* Anniversaries and Holidays
+#+CATEGORY: Holiday
+%%(org-calendar-holiday)
+%%(diary-date 10 25 t) Grenada's Thanksgiving
+#+CATEGORY: Birthday
+%%(diary-anniversary  1 1 1960) Someone is %d years old
+
+
+#+STARTUP: content
+#+STARTUP: lognotestate
+#+SEQ_TODO: TODO STARTED WAITING DELEGATED APPT | DONE DEFERRED CANCELLED
+#+TAGS: { SCHOOL(s) WORK(w) } CALL(c) ERRAND(e)

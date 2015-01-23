@@ -1,0 +1,54 @@
+* Assignments
+** DONE Math Reasoning Quiz
+   CLOSED: [2014-10-13 Mon 10:58] SCHEDULED: <2014-10-09 Thu>
+
+** TODO Math Reasoning HW #2B
+   SCHEDULED: <2014-10-25 Sat>
+   2.3: 14, 15, 17, 20, 21, 23
+   2.4: 1, 7, 11, 15, 16, 17, 19
+   2.5: 1, 5, 6, 7, 19, 21
+   2 Review: 6, 19, 20
+   2 Sup: 1, 12
+   
+** TODO Statistics HW #7
+   SCHEDULED: <2014-10-15 Wed>
+   pg #80: 46, 49, 50, 59
+   
+** TODO Programming Languages: Assignment 3 due
+   SCHEDULED: <2014-11-10 Mon>
+   
+** TODO Programming Languages: Exam 1
+   SCHEDULED: <2014-10-15 Wed>
+
+** TODO Database Systems Exam #1
+   SCHEDULED: <2014-10-13 Mon>
+   
+** TODO Database Systems Project #2 Decription
+   SCHEDULED: <2014-10-20 Mon>
+   
+** TODO Capstone Exam #2
+   SCHEDULED: <2014-10-30 Thu>
+
+** TODO Capstone Outline and Bibliography due
+   SCHEDULED: <2014-10-16 Thu>
+
+** TODO Capstone Paper Seminar
+   SCHEDULED: <2014-11-20 Thu>
+   
+   
+* Misc
+  
+* Math Reasoning 
+  Exam 1 Review: [[~/bin/random/school/reasoning/review.gif][review]] 
+* Programming Languages
+  Syllabus: [[~/SYL_COSC_4480_001_151S_QY675.rtf][syllabus]]
+  Attribute Grammars and Semantic Grammars (be on the exam)
+  
+* Database Systems
+
+* Statistics
+Syllabus: [[~/bin/random/school/stats/syllabus.rtf][syllabus]]
+
+* Capstone
+  Exam Question: Steps of theScientific method and the difference between
+  inductive and deductive reasoning.
