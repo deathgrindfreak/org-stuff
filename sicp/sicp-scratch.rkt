@@ -14,4 +14,43 @@
         (let ((smaller (split (- n 1))))
           (left-op painter (right-op smaller smaller))))))
 
-00000800000012300000123.00
+
+(/ (+ 5 4 (- 2 3 (+ 6 (/ 4 5))))
+   (* 3 (- 6 2) (- 2 7)))
+
+(define (square-sum-of-max-of-two a b c)
+  (cond ((or (> a b c)
+             (> b a c)) (+ (* a a)
+                           (* b b)))
+        ((or (> a c b)
+             (> c a b)) (+ (* a a)
+                           (* c c)))
+        ((or (> b c a)
+             (> c b a)) (+ (* b b)
+                           (* c c)))))
+
+(test 0 (p)) => (if (= x 0) => 0
+                    0
+                    (p))
+
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause else-clause)
+        (else else-clause)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+(define (square x)
+  (* x x))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+
+(define (good-enough? guess x)
+  (< (abs (- (square guess) x)) 0.001))
+
+(define (sqrt-iter guess x)
+  (new-if (good-enough? guess x)
+          guess
+          (sqrt-iter (improve guess x)
+                     x)))
