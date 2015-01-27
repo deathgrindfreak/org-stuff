@@ -13,3 +13,5 @@
         painter
         (let ((smaller (split (- n 1))))
           (left-op painter (right-op smaller smaller))))))
+
+00000800000012300000123.00
