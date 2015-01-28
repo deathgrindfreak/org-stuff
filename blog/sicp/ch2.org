@@ -1,22 +1,37 @@
-* SICP Chapter 2
-  
-These are my notes for the latter half of Chapter 2.  Since I started
-using org mode quite a bit after I began SICP, I'll have to come back
-and transcribe the previous sections at a later time (Like that's ever 
-going to happen).
+---
+layout: post
+title: SICP Chapter 2 Solutions
+date:  2015-01-24 23:55:32
+categories: sicp
+---
 
-** 2.2.3 Sequences as Conventional Interfaces
+These are my notes for Chapter 2 of the Structure and Interpretation
+of Computer Programs. Since I started using org mode quite a bit after
+I began SICP, I'll have to come back and transcribe the previous
+sections at a later time.
+
+* 2 Building Abstractions With Data
+
+** 2.1  Introduction to Data Abstraction
+*** 2.1.1  Example: Arithmetic Operations for Rational Numbers
+*** 2.1.2  Abstraction Barriers
+*** 2.1.3  What Is Meant by Data?
+*** 2.1.4  Extended Exercise: Interval Arithmetic
+** 2.2  Hierarchical Data and the Closure Property
+*** 2.2.1  Representing Sequences
+*** 2.2.2  Hierarchical Structures
+*** 2.2.3 Sequences as Conventional Interfaces
 One of the most important concepts in this section is the concept of
 the "signal chain" as illustrated in fig. 2.7.  Of course this is
 really a visualization of how programs are more conceptually tractable
 when they are modularized appropriately (a concept that is hammered on
 in the famous [[http://worrydream.com/refs/Hughes-WhyFunctionalProgrammingMatters.pdf]["Why Functional Programming Matters"]] paper).
 
-*** Sequence Operations
+**** Sequence Operations
 As the title suggests, this sub-section takes on the task of breaking
 down programs into sub-tasks using the signal chain metaphor.
 
-**** Exercise 2.33
+***** Exercise 2.33
 The best explanation for how to define functions in terms of folds (or
 just writing folds in the first place) actually came from the
 previously mentioned paper.  All a fold (right fold) does on a list is
@@ -54,7 +69,7 @@ each non-nil element with 1 and the final 'nil' with 0.
   (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
 #+END_SRC
 
-**** Exercise 2.34
+***** Exercise 2.34
 Just as was done in the previous exercise, we need to replace the
 conses in the list in order to perform the fold.  The following should
 do the trick:
@@ -69,7 +84,7 @@ do the trick:
               coefficient-sequence))
 #+END_SRC
 
-**** Exercise 2.35
+***** Exercise 2.35
 Using the 'replace cons' metaphor, if we replace all conses that are
 themselves pairs with a recursive call to count-leaves, and all
 non-pairs with '1', it will successfully calculate the number of
@@ -86,7 +101,7 @@ leaves in any tree:
                    t)))
 #+END_SRC
 
-**** Exercise 2.36
+***** Exercise 2.36
 I had to stare at an open buffer for a few minutes until the
 solution for this one hit me.  Since we're accumulating only the first
 element of every subsequence at a time, we just have to map the car
@@ -103,7 +118,7 @@ in the process).  Add, rinse, repeat.
             (accumulate-n op init (map cdr seqs)))))
 #+END_SRC
 
-**** Exercise 2.37
+***** Exercise 2.37
 These aren't too bad if you're familiar with some standard matrix
 operations.
 
@@ -138,7 +153,7 @@ transposed matrix to the right.
          m)))
 #+END_SRC
 
-**** Exercise 2.38
+***** Exercise 2.38
 The values for the expressions are:
 
 #+BEGIN_SRC scheme
@@ -166,7 +181,7 @@ This is of course due to the fact that (+ a b) == (+ b a). thus for
 all all op such that (op a b) == (op b a), foldr will produce the same
 result as foldl.
 
-**** Exercise 2.39
+***** Exercise 2.39
 It immediately comes to mind that we should use some sort of list
 operation (no duh) like cons or list, since we're not reducing, but
 merely manipulating the form of the list.  I generally find right
@@ -193,11 +208,11 @@ the desired procedure (that's one hell of a run-on sentence).
   (fold-left (lambda (x y) (list y x)) nil sequence))
 #+END_SRC 
 
-*** Nested Mappings
+**** Nested Mappings
 This section covers more on sequence operations, mainly on the subject
 of nested mappings and their applications.
 
-**** Exercise 2.40
+***** Exercise 2.40
 I'm not completely sure why they stuck this one in here, mainly since
 they did the work for us at the very beginning of the sub-section
 (perhaps to further illustrate the power of modular programs).
@@ -219,7 +234,7 @@ And prime-pairs becomes:
        (filter prime-sum? (unique-pairs n))))
 #+END_SRC
 
-**** Exercise 2.41
+***** Exercise 2.41
 You can guess the structure of this one pretty easily, though it
 unintuitively (at least for me at first) requires two flatmaps, with
 the last one being the only normal map.
@@ -235,7 +250,7 @@ the last one being the only normal map.
            (enumerate-interval 1 n)))
 #+END_SRC
 
-**** Exercise 2.42
+***** Exercise 2.42
 I'm actually pretty stoked about this problem, even though took me an
 embarrassing amount of time to complete. But I completed it without
 help nonetheless. My solution is something, I think, that the authors
@@ -349,17 +364,211 @@ I'm sure that there are much shorter ways to solve this problem, but
 I'm pretty happy with the way it performs (it can generate the 10x10
 solution in a second or so), so I'll stand behind it. 
 
-**** Exercise 2.43
-***** TODO 
+***** Exercise 2.43
+****** TODO 
 
-** 2.2.4 Example: A Picture Language
+*** 2.2.4 Example: A Picture Language
    
-*** The picture language
-**** Exercise 2.44
+**** The picture language
+This is how abstraction works at its best.  The simply fact that the
+only object we have to deal with is the 'painter' shows how powerful
+of a concept it can be.
+
+***** Exercise 2.44
+The up-split is almost identical in form to the right split, with the
+interchange of the beside and below functions. 
+
+#+BEGIN_SRC scheme
+(define (up-split painter n)
+  (if (= n 0)
+      painter
+      (let ((smaller (up-split (- n 1))))
+        (below painter (beside smaller smaller)))))
+#+END_SRC
      
-*** Higher-order operations
-**** Exercise 2.45
+**** Higher-order operations
+This section extends the previous section by introducing a couple of
+higher-order functions (one of them written by us in the next
+exercise) that abstract most of our previously written functions.
+    
+***** Exercise 2.45
+As was done with square-of-four, we need to create a function that
+returns a function.  However unlike square-of-four, the function that
+we return needs to take in two inputs: painter and n.
      
-*** Frames
-**** Exercise 2.46
-**** Exercise 3.47
+#+BEGIN_SRC scheme
+(define (split left-op right-op)
+  (lambda (painter n)
+    (if (= n 0)
+        painter
+        (let ((smaller (split (- n 1))))
+          (left-op painter (right-op smaller smaller))))))
+#+END_SRC     
+     
+**** Frames
+***** Exercise 2.46
+The most natural way to represent a vector is a simple list.  Thus our
+constructor becomes:
+
+#+BEGIN_SRC scheme
+(define (make-vect vx vy)
+  (list vx vy))
+#+END_SRC
+
+To get the x coordinate, simply get the car of the list:
+
+#+BEGIN_SRC scheme
+(define (xcor-vect v)
+  (car v))
+#+END_SRC
+
+To get the y coordinate, simply get the cadr of the list:
+
+#+BEGIN_SRC scheme
+(define (ycor-vect v)
+  (cadr v))
+#+END_SRC
+
+Using similar list operations, as well as our previously defined
+definitions, we can construct the add-vect, sub-vect and scale-vect
+operations:
+
+#+BEGIN_SRC scheme
+(define (add-vect v1 v2)
+  (list (+ (xcor-vect v1)
+           (xcor-vect v2))
+        (+ (ycor-vect v1)
+           (ycor-vect v2))))
+
+(define (sub-vect v1 v2)
+  (list (- (xcor-vect v1)
+           (xcor-vect v2))
+        (- (ycor-vect v1)
+           (ycor-vect v2))))
+
+(define (scale-vect s v)
+  (list (* s (xcor-vect v))
+        (* s (ycor-vect v))))
+#+END_SRC
+
+***** Exercise 2.47
+For the first constructor, the selectors are:
+
+#+BEGIN_SRC scheme
+(define (edge1-frame frame)
+  (car frame))
+
+(define (edge2-frame frame)
+  (cadr frame))
+
+(define (origin-frame frame)
+  (caddr frame))
+#+END_SRC
+
+For the second:
+
+#+BEGIN_SRC scheme
+(define (edge1-frame frame)
+  (car frame))
+
+(define (edge2-frame frame)
+  (cadr frame))
+
+(define (origin-frame frame)
+  (cddr frame))
+#+END_SRC
+**** Painters
+***** Exercise 2.48
+The most natural way to represent a segment is a list of two vectors.
+
+#+BEGIN_SRC scheme
+(define (make-segment sv ev)
+  (list sv ev))
+#+END_SRC
+
+The selectors then become:
+
+#+BEGIN_SRC scheme
+(define (start-segment segment)
+  (car segment))
+
+(define (end-segment segment)
+  (cadr segment))
+#+END_SRC
+
+***** Exercise 2.49
+
+a. In order to outline the frame we need four vectors, one pointing
+to each corner of the parallelogram that outlines the frame.  I've
+used let* here, even though I don't think it's been define in the book
+(you can do it with a normal let, but it would take four nested lets).
+If you're unfamiliar with the various let special forms that scheme
+offers, I recommend reading up on them [[http://www.ccs.neu.edu/home/dorai/t-y-scheme/t-y-scheme-Z-H-7.html#node_chap_5][here]].
+
+#+BEGIN_SRC scheme
+(define (paint-outline frame)
+  (let* ((origin (origin-frame frame))
+         (edge1 (add-vect origin (edge1-frame frame)))
+         (edge2 (add-vect origin (edge2-frame frame)))
+         (opposite-origin (add-vect edge1 edge2)))
+    ((segments->painter (list (make-segment origin edge1)
+                              (make-segment origin edge2)
+                              (make-segment edge1 opposite-origin)
+                              (make-segment edge2 opposite-origin)))
+     frame)))
+#+END_SRC
+
+b. Here we only need to connect the vectors constructed in the let* of
+the previous exercise in a slightly different manner.
+
+#+BEGIN_SRC scheme
+(define (paint-x frame)
+  (let* ((origin (origin-frame frame))
+         (edge1 (add-vect origin (edge1-frame frame)))
+         (edge2 (add-vect origin (edge2-frame frame)))
+         (opposite-origin (add-vect edge1 edge2)))
+    ((segments->painter (list (make-segment origin opposite-origin)
+                              (make-segment edge1 edge2)))
+     frame)))
+#+END_SRC
+
+c. To find the midpoint vector of two vectors we merely apply the transformation:
+
+#+BEGIN_SRC scheme
+midpoint (x1, y1) (x2, y2) -> ((x1 + x2) / 2, (y1 + y2) / 2)
+#+END_SRC
+
+Or in terms of scheme.
+
+#+BEGIN_SRC scheme
+(define (midpoint v1 v2)
+  (scale-vect 0.5 (add-vect v1 v2)))
+#+END_SRC
+
+The two let forms here are unnecessary, but are there to make the
+expression more readable.
+
+#+BEGIN_SRC scheme
+(define (paint-diamond frame)
+  (let* ((origin (origin-frame frame))
+         (edge1 (add-vect origin (edge1-frame frame)))
+         (edge2 (add-vect origin (edge2-frame frame)))
+         (opposite-origin (add-vect edge1 edge2)))
+    (let ((origin-edge1 (midpoint origin edge1))
+          (origin-edge2 (midpoint origin edge2))
+          (edge1-opp (midpoint edge1 opposite-origin))
+          (edge2-opp (midpoint edge2 opposite-origin)))
+      
+      ((segments->painter (list (make-segment origin-edge1 origin-edge2)
+                                (make-segment origin-edge1 edge1-opp)
+                                (make-segment origin-edge2 edge2-opp)
+                                (make-segment edge1-opp edge2-opp)))
+       frame))))
+#+END_SRC
+
+d.
+
+#+BEGIN_SRC scheme
+#+END_SRC
+
+**** Transforming and combining painters
