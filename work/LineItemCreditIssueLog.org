@@ -27,19 +27,25 @@
 *** DONE Work on add/update button behavior (show and hide)
     CLOSED: [2015-01-13 Tue 08:39] SCHEDULED: <2015-01-13 Tue>
 *** TODO Fix the "Good <TIME_OF_DAY> <USER_NAME>" greeting on the home screen (it isn't showing up for some reason)
-*** TODO Need to fix the navigation in the "Credit Entire Invoice" page
-*** TODO Fix the style issues on the Batch Edit view page.
-*** TODO Fix the "Need to enter a row before saving" error for the batch document save.
+*** DONE Need to fix the navigation in the "Credit Entire Invoice" page
+    CLOSED: [2015-01-29 Thu 17:13]
+*** DONE Fix the style issues on the Batch Edit view page.
+    CLOSED: [2015-01-29 Thu 17:13]
+*** DONE Fix the "Need to enter a row before saving" error for the batch document save.
+    CLOSED: [2015-01-29 Thu 17:13]
 *** TODO Need to make sure that errors are handled properly when adding credits (for instance, adding a line item credit twice).
-*** TODO If the errors are fixed, add a "successful update" notification on the screen.
-*** TODO Fix the search by documents feature
+*** DONE If the errors are fixed, add a "successful update" notification on the screen.
+    CLOSED: [2015-01-29 Thu 17:14]
+*** DONE Fix the search by documents feature
+    CLOSED: [2015-01-29 Thu 17:14]
 *** TODO Make sure all messages are either Confirm types with buttons or tray notifications.
 *** TODO Might need to add a "checkForUnsaved" method when the user tries to go back or leave the Batch Document page.
     
 *** TODO Fix the walmart stuff on the batch doc view (should they appear or not)
 *** DONE Customer Name will have to be handled somehow in the future (if an invalid number is entered)
     CLOSED: [2015-01-20 Tue 11:37]
-*** TODO Need to ensure that the parameter hash table is set up properly in BatchDocumentDAOImpl (createOrUpdateBatchDocument line 298)
+*** DONE Need to ensure that the parameter hash table is set up properly in BatchDocumentDAOImpl (createOrUpdateBatchDocument line 298)
+    CLOSED: [2015-01-29 Thu 17:14]
 
 *** DONE Need validation on Batch Create page
     CLOSED: [2015-01-20 Tue 11:37]
@@ -67,27 +73,32 @@
 *** TODO WCR Documents throw SQL errors when attempting to edit them
     SCHEDULED: <2015-01-13 Tue>
 
-*** TODO CHB (handbill) doesn't want to add new rows to LIC table (and probably the ACD table as well)
-    SCHEDULED: <2015-01-13 Tue>
+*** DONE CHB (handbill) doesn't want to add new rows to LIC table (and probably the ACD table as well)
+    CLOSED: [2015-01-29 Thu 17:14] SCHEDULED: <2015-01-13 Tue>
 
 *** DONE Add a delete button for the lic table/debug "Unable to parse int"
     CLOSED: [2015-01-20 Tue 11:39]
 
 *** TODO Determine how Ext RTL, Ext Cost are calculated in the Lic and Acd tables
 *** TODO Need a validator for the acd code combobox
-*** TODO Need validation when leaving a newly created batch document
-*** TODO Work on the search (seems to not be accurate for batch# search anyway)
+*** DONE Need validation when leaving a newly created batch document
+    CLOSED: [2015-01-29 Thu 17:15]
+*** DONE Work on the search (seems to not be accurate for batch# search anyway)
+    CLOSED: [2015-01-29 Thu 17:15]
 
 *** TODO Perhaps put an edit button on the batch doc view page in order to edit the entire batch doc
 *** TODO Perhaps add some custom error messages for the save on the batch doc screen using the return codes and a hash table for lookup
 
-*** TODO I believe that a document must have at least one LIC before saving.  If so, we'll need to provide some validation.
-*** TODO Saving a doc causes the save prompts for the leaving the current doc on tree and hitting the back button to pop up
+*** DONE I believe that a document must have at least one LIC before saving.  If so, we'll need to provide some validation.
+    CLOSED: [2015-01-29 Thu 17:16]
+*** DONE Saving a doc causes the save prompts for the leaving the current doc on tree and hitting the back button to pop up
+    CLOSED: [2015-01-29 Thu 17:16]
 
-*** TODO Line Item Credits, ACD and Comment aren't currently saved in the DB upon refeshing the page.  Also, Customer Name is generated on search somehow and not save.
+*** DONE Line Item Credits, ACD and Comment aren't currently saved in the DB upon refeshing the page.  Also, Customer Name is generated on search somehow and not save.
+    CLOSED: [2015-01-29 Thu 17:16]
 *** TODO Need to check on how all computed amounts are calculated and added to the table and header fields.
 *** TODO Order of elements in the search table isn't preserved on screen change.
-*** TODO Need a progress bar of some type for the save in batch doc view
+*** TODO Need to handle changes to customer id.
     
 
 * Issues Log for Line Item Credit System

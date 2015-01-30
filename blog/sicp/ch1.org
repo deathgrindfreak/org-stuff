@@ -1,3 +1,5 @@
+#+STARTUP: indent
+
 * 1 Building Abstractions with Procedures
 ** 1.1  The Elements of Programming
 *** 1.1.6  Conditional Expressions and Predicates
@@ -87,12 +89,127 @@ return the following:
      the second argument would be evaluated first.
 *** 1.1.7  Example: Square Roots by Newton's Method
 **** Exercise 1.6
-     Since the interpreter uses applicative order evaluation, the
-     else-expression in new-if will be evaluated when the function is
-     called. And since the else expression is a recursive call to
-     sqrt-iter, the base case will never be reached and an infinite
-     loop will occur.
+Since the interpreter uses applicative order evaluation, the
+else-expression in new-if will be evaluated when the function is
+called. And since the else expression is a recursive call to
+sqrt-iter, the base case will never be reached and an infinite
+loop will occur.
 **** Exercise 1.7
+
+Using some of the various printing and formatting functions that
+racket offers, we'll print out some values to compare how much the
+standard built-in sqrt and sqrt-iter differ as the input becomes very
+small and very large.  The named-let shown below should do nicely.
+
+#+BEGIN_SRC scheme
+(define (print-comparisons guess start-num)
+  (let loop ((i 0) (x start-num))
+    (when (< i 10)
+      (let ((root (sqrt x))
+            (iter (sqrt-iter guess x)))
+        (printf "(sqrt ~a) => ~a, (sqrt-iter ~a ~a) => ~a diff => ~a~%"
+                (~r x #:notation 'exponential)
+                (~r root #:notation 'positional #:min-width 9)
+                guess
+                (~r x #:notation 'exponential)
+                (~r iter #:notation 'positional #:min-width 9)
+                (~r (- root iter) #:notation 'exponential #:min-width 9)))
+      (loop (+ i 1) (/ x 10)))))
+#+END_SRC
+
+With a starting value of 0.2 and an initial guess of 1 we get:
+
+(print-comparisons 1 0.2) =>
+
+(sqrt 2e-01) =>  0.447214, (sqrt-iter 1 2e-01) =>  0.447619 diff => -4.054521e-04
+(sqrt 2e-02) =>  0.141421, (sqrt-iter 1 2e-02) =>  0.144424 diff => -3.002453e-03
+(sqrt 2e-03) =>  0.044721, (sqrt-iter 1 2e-03) =>  0.050131 diff => -5.409993e-03
+(sqrt 2e-04) =>  0.014142, (sqrt-iter 1 2e-04) =>  0.033353 diff => -1.921068e-02
+(sqrt 2e-05) =>  0.004472, (sqrt-iter 1 2e-05) =>  0.031463 diff => -2.69907e-02
+(sqrt 2e-06) =>  0.001414, (sqrt-iter 1 2e-06) =>  0.031271 diff => -2.98571e-02
+(sqrt 2e-07) =>  0.000447, (sqrt-iter 1 2e-07) =>  0.031252 diff => -3.080492e-02
+(sqrt 2e-08) =>  0.000141, (sqrt-iter 1 2e-08) =>   0.03125 diff => -3.110879e-02
+(sqrt 2e-09) =>  0.000045, (sqrt-iter 1 2e-09) =>   0.03125 diff => -3.12053e-02
+(sqrt 2e-10) =>  0.000014, (sqrt-iter 1 2e-10) =>   0.03125 diff => -3.123586e-02
+
+As you can see, things start do diverge rapidly right around the
+$10^{-3}$ mark.  What about a better guess for each iteration?  If we
+instead say, divide the guess by 2 or so each time, that should help
+right?  Well a little I suppose.  With the new code get
+
+#+BEGIN_SRC scheme
+(define (print-comparisons guess guess-factor f start-num)
+  (let loop ((i 0) (guess guess) (x start-num))
+    (when (< i 10)
+      (let ((root (sqrt x))
+            (iter (sqrt-iter guess x)))
+        (printf "(sqrt ~a) => ~a, (sqrt-iter ~a ~a) => ~a diff => ~a~%"
+                (~r x #:notation 'exponential)
+                (~r root #:notation 'positional #:min-width 9)
+                (~r guess #:notation 'exponential #:min-width 12)
+                (~r x #:notation 'exponential)
+                (~r iter #:notation 'positional #:min-width 9)
+                (~r (- root iter) #:notation 'exponential #:min-width 9)))
+      (loop (+ i 1) (f guess guess-factor) (/ x 10)))))
+#+END_SRC
+
+(print-comparisons 0.5 2 / 0.2)
+
+(sqrt 2e-01) =>  0.447214, (sqrt-iter        5e-01 2e-01) =>  0.447222 diff => -8.626722e-06
+(sqrt 2e-02) =>  0.141421, (sqrt-iter      2.5e-01 2e-02) =>  0.143106 diff => -1.684704e-03
+(sqrt 2e-03) =>  0.044721, (sqrt-iter     1.25e-01 2e-03) =>  0.049434 diff => -4.713038e-03
+(sqrt 2e-04) =>  0.014142, (sqrt-iter     6.25e-02 2e-04) =>   0.03285 diff => -1.870786e-02
+(sqrt 2e-05) =>  0.004472, (sqrt-iter    3.125e-02 2e-05) =>   0.03125 diff => -2.677786e-02
+(sqrt 2e-06) =>  0.001414, (sqrt-iter   1.5625e-02 2e-06) =>  0.015625 diff => -1.421079e-02
+(sqrt 2e-07) =>  0.000447, (sqrt-iter   7.8125e-03 2e-07) =>  0.007813 diff => -7.365286e-03
+(sqrt 2e-08) =>  0.000141, (sqrt-iter  3.90625e-03 2e-08) =>  0.003906 diff => -3.764829e-03
+(sqrt 2e-09) =>  0.000045, (sqrt-iter 1.953125e-03 2e-09) =>  0.001953 diff => -1.908404e-03
+(sqrt 2e-10) =>  0.000014, (sqrt-iter 9.765625e-04 2e-10) =>  0.000977 diff => -9.624204e-04
+
+The numbers get a bit better, but still comparatively bad.
+
+**** Exercise 1.8
+In order to convert the square root procedure to a cube root
+procedure, we must convert the expression:
+
+$$ \frac{x/y^2 + 2y}{3} $$
+
+to the lisp expression:
+
+#+BEGIN_SRC scheme
+(define (improve guess x)
+  (/ (+ (/ x
+           (* guess guess))
+        (* 2 guess))
+     3))
+#+END_SRC
+
+we also need to define cube as:
+
+#+BEGIN_SRC scheme
+(define (cube x)
+  (* x x x))
+#+END_SRC
+
+good-enough? then becomes:
+
+#+BEGIN_SRC scheme
+(define (good-enough? guess x)
+  (< (abs (- (cube guess) x)) 0.001))
+#+END_SRC
+
+finally, our cube root expression is:
+
+#+BEGIN_SRC scheme
+(define (cube-root-iter guess x)
+  (if (good-enough? guess x)
+          guess
+          (cube-root-iter (improve guess x)
+                     x)))
+#+END_SRC
+
+Which calculates the cube root of 32 as 3.1748093082550324, which is
+fairly close to what python calculated: 3.1748021039363987.
      
 *** 1.1.8  Procedures as Black-Box Abstractions
 ** 1.2  Procedures and the Processes They Generate

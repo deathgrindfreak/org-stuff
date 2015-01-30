@@ -1,3 +1,5 @@
+#+STARTUP: indent
+
 * Download Stored Procedure
   In order to lookup a stored procedure:
   
@@ -27,3 +29,15 @@
   + Enter 'tso wlmsrch'
   + Enter the stored procedure name 
     
+    
+Design - N/A                                                                            
+Coding - Complete                                            
+Testing - Ongoing                              
+Estimated completion: 2014-04-04                       
+Estimated Installation: TBD
+
+* Find a table name
+  + Enter the command 'tso platrcup'
+  + After the search pops up enter the table name, followed by the
+    division prefix (usually mc or ds) and ensure that the the db2 to
+    subsystem ends with a t (for test, so no db2p, etc...).
