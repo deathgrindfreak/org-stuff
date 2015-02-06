@@ -1,3 +1,5 @@
+#+STARTUP: indent
+
 ---
 layout: post
 title: SICP Chapter 2 Solutions
@@ -11,7 +13,6 @@ I began SICP, I'll have to come back and transcribe the previous
 sections at a later time.
 
 * 2 Building Abstractions With Data
-
 ** 2.1  Introduction to Data Abstraction
 *** 2.1.1  Example: Arithmetic Operations for Rational Numbers
 *** 2.1.2  Abstraction Barriers
@@ -368,7 +369,6 @@ solution in a second or so), so I'll stand behind it.
 ****** TODO 
 
 *** 2.2.4 Example: A Picture Language
-   
 **** The picture language
 This is how abstraction works at its best.  The simply fact that the
 only object we have to deal with is the 'painter' shows how powerful
@@ -507,10 +507,10 @@ offers, I recommend reading up on them [[http://www.ccs.neu.edu/home/dorai/t-y-s
 
 #+BEGIN_SRC scheme
 (define (paint-outline frame)
-  (let* ((origin (origin-frame frame))
-         (edge1 (add-vect origin (edge1-frame frame)))
-         (edge2 (add-vect origin (edge2-frame frame)))
-         (opposite-origin (add-vect edge1 edge2)))
+  (let ((origin (make-vect 0.0 0.0))
+        (edge1 (make-vect 1.0 0.0))
+        (edge2 (make-vect 0.0 1.0))
+        (opposite-origin (make-vect 1.0 1.0)))
     ((segments->painter (list (make-segment origin edge1)
                               (make-segment origin edge2)
                               (make-segment edge1 opposite-origin)
@@ -523,10 +523,10 @@ the previous exercise in a slightly different manner.
 
 #+BEGIN_SRC scheme
 (define (paint-x frame)
-  (let* ((origin (origin-frame frame))
-         (edge1 (add-vect origin (edge1-frame frame)))
-         (edge2 (add-vect origin (edge2-frame frame)))
-         (opposite-origin (add-vect edge1 edge2)))
+  (let ((origin (make-vect 0.0 0.0))
+        (edge1 (make-vect 1.0 0.0))
+        (edge2 (make-vect 0.0 1.0))
+        (opposite-origin (make-vect 1.0 1.0)))
     ((segments->painter (list (make-segment origin opposite-origin)
                               (make-segment edge1 edge2)))
      frame)))
@@ -535,40 +535,74 @@ the previous exercise in a slightly different manner.
 c. To find the midpoint vector of two vectors we merely apply the transformation:
 
 #+BEGIN_SRC scheme
-midpoint (x1, y1) (x2, y2) -> ((x1 + x2) / 2, (y1 + y2) / 2)
-#+END_SRC
-
-Or in terms of scheme.
-
-#+BEGIN_SRC scheme
-(define (midpoint v1 v2)
-  (scale-vect 0.5 (add-vect v1 v2)))
-#+END_SRC
-
-The two let forms here are unnecessary, but are there to make the
-expression more readable.
-
-#+BEGIN_SRC scheme
 (define (paint-diamond frame)
-  (let* ((origin (origin-frame frame))
-         (edge1 (add-vect origin (edge1-frame frame)))
-         (edge2 (add-vect origin (edge2-frame frame)))
-         (opposite-origin (add-vect edge1 edge2)))
-    (let ((origin-edge1 (midpoint origin edge1))
-          (origin-edge2 (midpoint origin edge2))
-          (edge1-opp (midpoint edge1 opposite-origin))
-          (edge2-opp (midpoint edge2 opposite-origin)))
-      
-      ((segments->painter (list (make-segment origin-edge1 origin-edge2)
-                                (make-segment origin-edge1 edge1-opp)
-                                (make-segment origin-edge2 edge2-opp)
-                                (make-segment edge1-opp edge2-opp)))
-       frame))))
+  (let ((origin-edge1 (make-vect 0.0 0.5))
+        (origin-edge2 (make-vect 0.5 0.0))
+        (edge1-opp (make-vect 0.5 1.0))
+        (edge2-opp (make-vect 1.0 0.5)))
+    ((segments->painter (list (make-segment origin-edge1 origin-edge2)
+                              (make-segment origin-edge1 edge1-opp)
+                              (make-segment origin-edge2 edge2-opp)
+                              (make-segment edge1-opp edge2-opp)))
+     frame)))
 #+END_SRC
 
 d.
+
+****** TODO Actually figure out all the little vectors for the wave image
 
 #+BEGIN_SRC scheme
 #+END_SRC
 
 **** Transforming and combining painters
+***** Exercise 2.50
+****** TODO Need to add vector diagrams for this one
+
+#+BEGIN_SRC scheme
+(define (flip-horiz painter)
+  (transform-painter painter
+                     (make-vect 1.0 0.0)
+                     (make-vect 0.0 0.0)
+                     (make-vect 0.0 1.0)))
+#+END_SRC
+
+#+BEGIN_SRC scheme
+(define (rotate-180 painter)
+  (transform-painter painter
+                     (make-vect 1.0 1.0)
+                     (make-vect 0.0 1.0)
+                     (make-vect 1.0 0.0)))
+#+END_SRC
+
+#+BEGIN_SRC scheme
+(define (rotate-270 painter)
+  (transform-painter painter
+                     (make-vect 0.0 1.0)
+                     (make-vect 0.0 0.0)
+                     (make-vect 1.0 1.0)))
+#+END_SRC
+***** Exercise 2.51
+#+BEGIN_SRC scheme
+(define (below painter1 painter2)
+  (let ((split-point (make-vect 0.0 0.5)))
+    (let ((painter-below (transform-painter painter 1
+                                            (make-vect 0.0 0.0)
+                                            (make-vect 1.0 0.0)
+                                            split-point))
+          (painter-above (transform-painter painter2
+                                            split-point
+                                            (make-vect 1.0 0.5)
+                                            (make-vect 0.0 1.0))))
+      (lambda (frame)
+        (painter-below frame)
+        (painter-above frame)))))
+#+END_SRC
+
+#+BEGIN_SRC scheme
+(define (below painter1 painter2)
+  (rotate-270 (beside painter1 painter2)))
+#+END_SRC
+**** Levels of language for robust design
+***** Exercise 2.52
+** 2.3 Symbolic Data
+*** 2.3.1 Quotation
