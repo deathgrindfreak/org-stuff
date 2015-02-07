@@ -116,11 +116,71 @@
                               (make-segment edge1-opp edge2-opp)))
      frame)))
 
-(paint-outline (make-frame (make-vect 0.01 0.01)
-                           (make-vect .98 0.0)
-                           (make-vect 0.0 .98)))
 
-(send *target* save-file "paint-outline.png" 'png)
+(define (paint-wave frame)
+  ((segments->painter
+    (transform-ys (list
+                        
+                   ;; Head
+                   (make-segment (make-vect 0.38 0.87)
+                                 (make-vect 0.41 1.00))
+                   (make-segment (make-vect 0.38 0.87)
+                                 (make-vect 0.41 0.76))
+                   (make-segment (make-vect 0.61 0.87)
+                                 (make-vect 0.58 1.00))
+                   (make-segment (make-vect 0.61 0.87)
+                                 (make-vect 0.58 0.76))
+                   
+                   ;; Shoulders
+                   (make-segment (make-vect 0.41 0.76)
+                                 (make-vect 0.34 0.76))
+                   (make-segment (make-vect 0.58 0.76)
+                                 (make-vect 0.72 0.76))
+
+                   ;; Arms
+                   (make-segment (make-vect 0.72 0.76)
+                                 (make-vect 1.00 0.48))
+                   (make-segment (make-vect 0.58 0.58)
+                                 (make-vect 1.00 0.33))
+                   (make-segment (make-vect 0.36 0.60)
+                                 (make-vect 0.34 0.68))
+                   (make-segment (make-vect 0.34 0.68)
+                                 (make-vect 0.16 0.50))
+                   (make-segment (make-vect 0.16 0.50)
+                                 (make-vect 0.00 0.72))
+                   (make-segment (make-vect 0.16 0.68)
+                                 (make-vect 0.00 0.88))
+                   (make-segment (make-vect 0.16 0.68)
+                                 (make-vect 0.34 0.76))
+
+                   ;; Legs
+                   (make-segment (make-vect 0.58 0.58)
+                                 (make-vect 0.75 0.00))
+                   (make-segment (make-vect 0.50 0.42)
+                                 (make-vect 0.60 0.00))
+                   (make-segment (make-vect 0.50 0.42)
+                                 (make-vect 0.40 0.00))
+                   (make-segment (make-vect 0.36 0.60)
+                                 (make-vect 0.25 0.00))
+                   
+                   )))
+   frame))
+
+(define (transform-ys lst)
+  (map (lambda (seg)
+         (let ((st (start-segment seg))
+               (ed (end-segment seg)))
+           (make-segment (make-vect (xcor-vect st)
+                                    (- 1 (ycor-vect st)))
+                         (make-vect (xcor-vect ed)
+                                    (- 1 (ycor-vect ed))))))
+       lst))
+
+(paint-wave (make-frame (make-vect 0.0 0.0)
+                        (make-vect 1.0 0.0)
+                        (make-vect 0.0 1.0)))
+
+(send *target* save-file "paint-wave.png" 'png)
 
 ;; (send *dc* draw-line
 ;;       0 0
