@@ -569,8 +569,8 @@ the previous exercise in a slightly different manner.
      frame)))
 #+END_SRC
 
-#+CAPTION: paint-outline
-#+NAME: paint-outline
+#+CAPTION: paint-x
+#+NAME: paint-x
 [[images/paint-x.png]]
 
 c. To find the midpoint vector of two vectors we merely apply the transformation:
@@ -588,8 +588,8 @@ c. To find the midpoint vector of two vectors we merely apply the transformation
      frame)))
 #+END_SRC
 
-#+CAPTION: paint-outline
-#+NAME: paint-outline
+#+CAPTION: paint-diamond
+#+NAME: paint-diamond
 [[images/paint-diamond.png]]
 
 d. Unlike the others, the wave painter that I developed is far more
@@ -658,8 +658,8 @@ y coordinates so that I can still be canonical with my solution.
    frame))
 #+END_SRC
 
-#+CAPTION: paint-outline
-#+NAME: paint-outline
+#+CAPTION: paint-wave
+#+NAME: paint-wave
 [[images/paint-wave.png]]
 
 **** Transforming and combining painters
@@ -671,8 +671,12 @@ y coordinates so that I can still be canonical with my solution.
   (transform-painter painter
                      (make-vect 1.0 0.0)
                      (make-vect 0.0 0.0)
-                     (make-vect 0.0 1.0)))
+                     (make-vect 1.0 1.0)))
 #+END_SRC
+
+#+CAPTION: flip-horiz
+#+NAME: flip-horiz 
+[[images/paint-flip-horiz.png]]
 
 #+BEGIN_SRC scheme
 (define (rotate-180 painter)
@@ -682,6 +686,10 @@ y coordinates so that I can still be canonical with my solution.
                      (make-vect 1.0 0.0)))
 #+END_SRC
 
+#+CAPTION: rotate-180
+#+NAME: rotate-180
+[[images/paint-rotate-180.png]]
+
 #+BEGIN_SRC scheme
 (define (rotate-270 painter)
   (transform-painter painter
@@ -689,11 +697,16 @@ y coordinates so that I can still be canonical with my solution.
                      (make-vect 0.0 0.0)
                      (make-vect 1.0 1.0)))
 #+END_SRC
+
+#+CAPTION: rotate-270
+#+NAME: rotate-270
+[[images/paint-rotate-270.png]]
+
 ***** Exercise 2.51
 #+BEGIN_SRC scheme
 (define (below painter1 painter2)
   (let ((split-point (make-vect 0.0 0.5)))
-    (let ((painter-below (transform-painter painter 1
+    (let ((painter-below (transform-painter painter1
                                             (make-vect 0.0 0.0)
                                             (make-vect 1.0 0.0)
                                             split-point))
@@ -710,6 +723,11 @@ y coordinates so that I can still be canonical with my solution.
 (define (below painter1 painter2)
   (rotate-270 (beside painter1 painter2)))
 #+END_SRC
+
+#+CAPTION: below
+#+NAME: below
+[[images/paint-below.png]]
+
 **** Levels of language for robust design
 ***** Exercise 2.52
 ** 2.3 Symbolic Data

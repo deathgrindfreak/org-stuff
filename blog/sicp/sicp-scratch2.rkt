@@ -161,9 +161,7 @@
                    (make-segment (make-vect 0.50 0.42)
                                  (make-vect 0.40 0.00))
                    (make-segment (make-vect 0.36 0.60)
-                                 (make-vect 0.25 0.00))
-                   
-                   )))
+                                 (make-vect 0.25 0.00)))))
    frame))
 
 (define (transform-ys lst)
@@ -176,11 +174,54 @@
                                     (- 1 (ycor-vect ed))))))
        lst))
 
-(paint-wave (make-frame (make-vect 0.0 0.0)
-                        (make-vect 1.0 0.0)
-                        (make-vect 0.0 1.0)))
+(define (transform-painter painter origin corner1 corner2)
+  (lambda (frame)
+    (let ((m (frame-coord-map frame)))
+      (let ((new-origin (m origin)))
+        (painter
+         (make-frame new-origin
+                     (sub-vect (m corner1) new-origin)
+                     (sub-vect (m corner2) new-origin)))))))
 
-(send *target* save-file "paint-wave.png" 'png)
+
+(define (flip-horiz painter)
+  (transform-painter painter
+                     (make-vect 1.0 0.0)
+                     (make-vect 0.0 0.0)
+                     (make-vect 1.0 1.0)))
+
+(define (rotate-180 painter)
+  (transform-painter painter
+                     (make-vect 1.0 1.0)
+                     (make-vect 0.0 1.0)
+                     (make-vect 1.0 0.0)))
+
+(define (rotate-270 painter)
+  (transform-painter painter
+                     (make-vect 0.0 1.0)
+                     (make-vect 0.0 0.0)
+                     (make-vect 1.0 1.0)))
+
+(define (below painter1 painter2)
+  (let ((split-point (make-vect 0.0 0.5)))
+    (let ((painter-below (transform-painter painter1
+                                            (make-vect 0.0 0.0)
+                                            (make-vect 1.0 0.0)
+                                            split-point))
+          (painter-above (transform-painter painter2
+                                            split-point
+                                            (make-vect 1.0 0.5)
+                                            (make-vect 0.0 1.0))))
+      (lambda (frame)
+        (painter-below frame)
+        (painter-above frame)))))
+
+((flip-horiz paint-wave) (make-frame (make-vect 0.0 0.0)
+                                        (make-vect 1.0 0.0)
+                                        (make-vect 0.0 1.0)))
+
+
+(send *target* save-file "paint-flip-horiz.png" 'png)
 
 ;; (send *dc* draw-line
 ;;       0 0
