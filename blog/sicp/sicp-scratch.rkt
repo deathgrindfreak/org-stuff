@@ -1,5 +1,6 @@
 #lang racket
 
+(require racket/draw)
 (require racket/pretty)
 (require racket/format)
 
@@ -104,3 +105,5 @@
 
 (define (below painter1 painter2)
   (rotate-270 (beside painter1 painter2)))
+
+

@@ -498,12 +498,45 @@ The selectors then become:
 
 ***** Exercise 2.49
 
+Although the book doesn't provide a way to actually draw the painters,
+we can use racket's drawing toolkit to do so.  
+
+First, define how big the picture will be.  I simply chose 300x300
+since it seemed like a good size.  Then define a bitmap-dc, and our
+implementation for drawing lines.
+
+#+BEGIN_SRC scheme
+(define *width* 300)
+(define *height* 300)
+(define *target* (make-bitmap *width* *height*))
+(define *dc* (new bitmap-dc% [bitmap *target*]))
+
+(send *dc* draw-rectangle 0 0 *width* *height*)
+(send *dc* set-pen "black" 2 'solid)
+#+END_SRC
+
+The last two lines set our background color and pen size respectively.
+We can also save the images by calling the save-file method.
+
+#+BEGIN_SRC scheme
+(send *target* save-file "image.png" 'png)
+#+END_SRC
+
+Finally, the function for drawing the actual lines is:
+
+#+BEGIN_SRC scheme
+(define (draw-line start end)
+  (send *dc* draw-line
+        (* *width* (xcor-vect start))
+        (* *height* (ycor-vect start))
+        (* *width* (xcor-vect end))
+        (* *height* (ycor-vect end))))
+#+END_SRC
+
+
 a. In order to outline the frame we need four vectors, one pointing
-to each corner of the parallelogram that outlines the frame.  I've
-used let* here, even though I don't think it's been define in the book
-(you can do it with a normal let, but it would take four nested lets).
-If you're unfamiliar with the various let special forms that scheme
-offers, I recommend reading up on them [[http://www.ccs.neu.edu/home/dorai/t-y-scheme/t-y-scheme-Z-H-7.html#node_chap_5][here]].
+to each corner of the parallelogram that outlines the frame (I've also
+tweaked the frame in order to let it appear on screen).
 
 #+BEGIN_SRC scheme
 (define (paint-outline frame)
@@ -518,6 +551,10 @@ offers, I recommend reading up on them [[http://www.ccs.neu.edu/home/dorai/t-y-s
      frame)))
 #+END_SRC
 
+#+CAPTION: paint-outline
+#+NAME: paint-outline
+[[images/paint-outline.png]]
+
 b. Here we only need to connect the vectors constructed in the let* of
 the previous exercise in a slightly different manner.
 
@@ -531,6 +568,10 @@ the previous exercise in a slightly different manner.
                               (make-segment edge1 edge2)))
      frame)))
 #+END_SRC
+
+#+CAPTION: paint-outline
+#+NAME: paint-outline
+[[images/paint-x.png]]
 
 c. To find the midpoint vector of two vectors we merely apply the transformation:
 
@@ -547,7 +588,14 @@ c. To find the midpoint vector of two vectors we merely apply the transformation
      frame)))
 #+END_SRC
 
-d.
+#+CAPTION: paint-outline
+#+NAME: paint-outline
+[[images/paint-diamond.png]]
+
+d. Unlike the others, the wave painter that I developed is far more ad-hoc.
+
+#+BEGIN_SRC scheme
+#+END_SRC
 
 ****** TODO Actually figure out all the little vectors for the wave image
 
