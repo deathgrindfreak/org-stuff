@@ -730,5 +730,99 @@ y coordinates so that I can still be canonical with my solution.
 
 **** Levels of language for robust design
 ***** Exercise 2.52
+
+a. A pretty rudimentary smile, but a smile nonetheless.
+
+#+BEGIN_SRC scheme
+(define (paint-wave frame)
+  ((segments->painter
+    (transform-ys (list
+                        
+                   ;; Head
+                   (make-segment (make-vect 0.38 0.87)
+                                 (make-vect 0.41 1.00))
+                   (make-segment (make-vect 0.38 0.87)
+                                 (make-vect 0.41 0.76))
+                   (make-segment (make-vect 0.61 0.87)
+                                 (make-vect 0.58 1.00))
+                   (make-segment (make-vect 0.61 0.87)
+                                 (make-vect 0.58 0.76))
+
+                   ;; Smile
+                   (make-segment (make-vect 0.43 .87)
+                                 (make-vect 0.49 .85))
+                   (make-segment (make-vect 0.55 .87)
+                                 (make-vect 0.49 .85))
+                   
+                   ;; Shoulders
+                   (make-segment (make-vect 0.41 0.76)
+                                 (make-vect 0.34 0.76))
+                   (make-segment (make-vect 0.58 0.76)
+                                 (make-vect 0.72 0.76))
+
+                   ;; Arms
+                   (make-segment (make-vect 0.72 0.76)
+                                 (make-vect 1.00 0.48))
+                   (make-segment (make-vect 0.58 0.58)
+                                 (make-vect 1.00 0.33))
+                   (make-segment (make-vect 0.36 0.60)
+                                 (make-vect 0.34 0.68))
+                   (make-segment (make-vect 0.34 0.68)
+                                 (make-vect 0.16 0.50))
+                   (make-segment (make-vect 0.16 0.50)
+                                 (make-vect 0.00 0.72))
+                   (make-segment (make-vect 0.16 0.68)
+                                 (make-vect 0.00 0.88))
+                   (make-segment (make-vect 0.16 0.68)
+                                 (make-vect 0.34 0.76))
+
+                   ;; Legs
+                   (make-segment (make-vect 0.58 0.58)
+                                 (make-vect 0.75 0.00))
+                   (make-segment (make-vect 0.50 0.42)
+                                 (make-vect 0.60 0.00))
+                   (make-segment (make-vect 0.50 0.42)
+                                 (make-vect 0.40 0.00))
+                   (make-segment (make-vect 0.36 0.60)
+                                 (make-vect 0.25 0.00)))))
+   frame))
+#+END_SRC
+
+#+CAPTION: smile
+#+NAME: smile
+[[images/wave-with-smile.png]]
+
+b. 
+ 
+#+BEGIN_SRC scheme
+(define (new-corner-split painter n)
+  (if (= n 0)
+      painter
+      (let ((up (up-split painter (- n 1)))
+            (right (right-split painter (- n 1))))
+        (let ((top-left up)
+              (bottom-right right)
+              (corner (corner-split painter (- n 1))))
+          (beside (below painter top-left)
+                  (below bottom-right corner))))))
+#+END_SRC
+
+#+CAPTION: new corner split
+#+NAME: new corner split
+[[images/new-corner-split.png]]
+
+c.
+
+#+BEGIN_SRC scheme
+(define (new-square-limit painter n)
+  (let ((combine4 (square-of-four rotate-270 identity
+                                  identity rotate-270)))
+    (combine4 (corner-split painter n))))
+#+END_SRC
+
+#+CAPTION: new square limit
+#+NAME: new square limit 
+[[images/new-square-limit.png]]
+
 ** 2.3 Symbolic Data
 *** 2.3.1 Quotation

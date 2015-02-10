@@ -130,6 +130,12 @@
                                  (make-vect 0.58 1.00))
                    (make-segment (make-vect 0.61 0.87)
                                  (make-vect 0.58 0.76))
+
+                   ;; Smile
+                   (make-segment (make-vect 0.43 .87)
+                                 (make-vect 0.49 .85))
+                   (make-segment (make-vect 0.55 .87)
+                                 (make-vect 0.49 .85))
                    
                    ;; Shoulders
                    (make-segment (make-vect 0.41 0.76)
@@ -183,12 +189,23 @@
                      (sub-vect (m corner1) new-origin)
                      (sub-vect (m corner2) new-origin)))))))
 
+(define (identity painter)
+  (transform-painter painter
+                     (make-vect 0.0 0.0)
+                     (make-vect 1.0 0.0)
+                     (make-vect 0.0 1.0)))
 
 (define (flip-horiz painter)
   (transform-painter painter
                      (make-vect 1.0 0.0)
                      (make-vect 0.0 0.0)
                      (make-vect 1.0 1.0)))
+
+(define (flip-vert painter)
+  (transform-painter painter
+                     (make-vect 0.0 1.0)
+                     (make-vect 1.0 1.0)
+                     (make-vect 0.0 0.0)))
 
 (define (rotate-180 painter)
   (transform-painter painter
@@ -216,12 +233,77 @@
         (painter-below frame)
         (painter-above frame)))))
 
-((flip-horiz paint-wave) (make-frame (make-vect 0.0 0.0)
-                                        (make-vect 1.0 0.0)
-                                        (make-vect 0.0 1.0)))
+(define (beside painter1 painter2)
+  (let ((split-point (make-vect 0.5 0.0)))
+    (let ((painter-left (transform-painter painter1
+                                            (make-vect 0.0 0.0)
+                                            split-point
+                                            (make-vect 0.0 1.0)))
+          (painter-right (transform-painter painter2
+                                            split-point
+                                            (make-vect 1.0 0.0)
+                                            (make-vect 0.5 1.0))))
+      (lambda (frame)
+        (painter-left frame)
+        (painter-right frame)))))
+
+(define (right-split painter n)
+  (if (= n 0)
+      painter
+      (let ((smaller (right-split painter (- n 1))))
+        (beside painter (below smaller smaller)))))
+
+(define (up-split painter n)
+  (if (= n 0)
+      painter
+      (let ((smaller (up-split painter (- n 1))))
+        (below painter (beside smaller smaller)))))
+
+(define (corner-split painter n)
+  (if (= n 0)
+      painter
+      (let ((up (up-split painter (- n 1)))
+            (right (right-split painter (- n 1))))
+        (let ((top-left (beside up up))
+              (bottom-right (below right right))
+              (corner (corner-split painter (- n 1))))
+          (beside (below painter top-left)
+                  (below bottom-right corner))))))
+
+(define (square-limit painter n)
+  (let ((quarter (corner-split painter n)))
+    (let ((half (beside (flip-horiz quarter) quarter)))
+      (below (flip-vert half) half))))
+
+(define (new-corner-split painter n)
+  (if (= n 0)
+      painter
+      (let ((up (up-split painter (- n 1)))
+            (right (right-split painter (- n 1))))
+        (let ((top-left up)
+              (bottom-right right)
+              (corner (corner-split painter (- n 1))))
+          (beside (below painter top-left)
+                  (below bottom-right corner))))))
+
+(define (new-square-limit painter n)
+  (let ((combine4 (square-of-four rotate-270 identity
+                                  identity rotate-270)))
+    (combine4 (corner-split painter n))))
+
+(define (square-of-four tl tr bl br)
+  (lambda (painter)
+    (let ((top (beside (tl painter) (tr painter)))
+          (bottom (beside (bl painter) (br painter))))
+      (below bottom top))))
 
 
-(send *target* save-file "paint-flip-horiz.png" 'png)
+((new-square-limit paint-wave 4) (make-frame (make-vect 0.0 0.0)
+                           (make-vect 1.0 0.0)
+                           (make-vect 0.0 1.0)))
+
+
+(send *target* save-file "new-square-limit.png" 'png)
 
 ;; (send *dc* draw-line
 ;;       0 0
