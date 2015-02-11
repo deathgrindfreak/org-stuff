@@ -593,7 +593,7 @@ c. To find the midpoint vector of two vectors we merely apply the transformation
 [[images/paint-diamond.png]]
 
 d. Unlike the others, the wave painter that I developed is far more
-ad-hoc.  Also, since the y coordinate is measured differently in
+ad-hock.  Also, since the y coordinate is measured differently in
 racket draw than in SICP, I made a helper function that transforms the
 y coordinates so that I can still be canonical with my solution.
 
@@ -826,3 +826,29 @@ c.
 
 ** 2.3 Symbolic Data
 *** 2.3.1 Quotation
+**** Exercise 2.53
+#+BEGIN_SRC scheme
+(list 'a 'b 'c) => (a b c)
+(list (list 'george)) => ((george))
+(cdr '((x1 x2) (y1 y2))) => ((y1 y2))
+(cadr '((x1 x2) (y1 y2))) => (y1 y2)
+(pair? (car '(a short list))) => #f
+(memq 'red '((red shoes) (blue socks))) => #f
+(memq 'red '(red shoes blue socks)) => (red shoes blue socks)
+#+END_SRC
+
+**** Exercise 2.54
+
+#+BEGIN_SRC scheme
+(define (new-equal? a b)
+  (cond ((not (eq? (length a) (length b))) #f)
+        ((or (null? a) (null? b)) #t)
+        (else (and (eq? (car a)
+                        (car b))
+                   (new-equal? (cdr a)
+                               (cdr b))))))
+#+END_SRC
+**** Exercise 2.55
+A quote that is quoted is just the symbol for the single quote.  It
+depends on the implementation of course.
+*** 2.3.2 Example: Symbolic Differentiation

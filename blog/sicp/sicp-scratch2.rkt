@@ -308,3 +308,20 @@
 ;; (send *dc* draw-line
 ;;       0 0
 ;;       30 30)
+
+
+(list 'a 'b 'c)
+(list (list 'george))
+(cdr '((x1 x2) (y1 y2)))
+(cadr '((x1 x2) (y1 y2)))
+(pair? (car '(a short list)))
+(memq 'red '((red shoes) (blue socks)))
+(memq 'red '(red shoes blue socks))
+
+(define (new-equal? a b)
+  (cond ((not (eq? (length a) (length b))) #f)
+        ((or (null? a) (null? b)) #t)
+        (else (and (eq? (car a)
+                        (car b))
+                   (new-equal? (cdr a)
+                               (cdr b))))))
