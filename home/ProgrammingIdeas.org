@@ -1,0 +1,2 @@
+* Change the xscreensaver login look
+* Spin down program based on ncmpcpp play time

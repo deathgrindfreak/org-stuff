@@ -899,3 +899,5 @@ and deriv becomes:
          (error "unknown expression type -- DERIV" exp))))
 #+END_SRC
 
+**** Exercise 2.57
+
