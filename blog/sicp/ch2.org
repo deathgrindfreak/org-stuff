@@ -899,3 +899,71 @@ and deriv becomes:
          (error "unknown expression type -- DERIV" exp))))
 #+END_SRC
 
+**** Exercise 2.57
+multiplier and addend don't change for this one, however multiplicand
+and augend become:
+
+#+BEGIN_SRC scheme
+(define (augend a)
+  (if (null? (cdddr a))
+      (caddr a)
+      (cons '+ (cddr a))))
+
+(define (multiplicand p)
+  (if (null? (cdddr p))
+      (caddr p)
+      (cons '* (cddr p))))
+#+END_SRC
+**** Exercise 2.58
+a) In order to provide infix support, we just have to change the
+functions that describe addition and multiplication:
+
+#+BEGIN_SRC scheme
+(define (make-sum a1 a2) (list a1 '+ a2))
+
+(define (make-product m1 m2) (list m1 '* m2))
+
+(define (sum? x)
+  (and (pair? x) (eq? (cadr x) '+)))
+
+(define (product? x)
+  (and (pair? x) (eq? (cadr x) '*)))
+
+(define (addend a) (car a))
+(define (augend a) (caddr a))
+
+(define (multiplier p) (car p))
+(define (multiplicand p) (caddr p))
+#+END_SRC
+
+b) For this final step, we merely need to alter augend and
+multiplicand and as long as the input is not malformed (order of
+operations is preserved and such), our derivitive function should be
+able to handle random infix functions.
+
+#+BEGIN_SRC scheme
+(define (augend a)
+  (if (null? (cdddr a))
+      (caddr a)
+      (cddr a)))
+
+(define (multiplicand p)
+  (if (null? (cdddr p))
+      (caddr p)
+      (cddr p)))
+#+END_SRC
+*** 2.3.3 Example: Representing Sets
+**** Exercise 2.59
+For the union of two sets, we interchange the lower arguments of
+intersection-set and test for null values individually.
+
+#+BEGIN_SRC scheme
+(define (union-set set1 set2)
+  (cond ((null? set2) set1)
+        ((null? set1) set2)
+        ((element-of-set? (car set1) set2)
+         (union-set (cdr set1) set2))
+         (else (cons (car set1)
+                     (union-set (cdr set1) set2)))))
+#+END_SRC
+**** Exercise 2.60
