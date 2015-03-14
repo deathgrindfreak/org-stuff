@@ -967,3 +967,39 @@ intersection-set and test for null values individually.
                      (union-set (cdr set1) set2)))))
 #+END_SRC
 **** Exercise 2.60
+
+For the duplicate member representation, element-of? will remain the same, 
+since all it really does is search the list until a match is found.
+
+#+BEGIN_SRC scheme
+(define (element-of? x set)
+  (cond ((null? set) #f)
+        ((equal? x (car set)) #t)
+        (else (element-of? x (cdr set)))))
+#+END_SRC
+
+Since duplicates are allowed, adjoin-set becomes much simpler.
+
+#+BEGIN_SRC scheme
+(define (adjoin-set x set) (cons x set))
+#+END_SRC
+
+Intersection will remain the same as well
+#+BEGIN_SRC scheme
+(define (intersection set1 set2)
+  (cond ((or (null? set1) (null? set2)) '())
+        ((element-of? (car set1) set2)
+         (cons (car set1)
+               (intersection (cdr set1) set2)))
+        (else (intersection (cdr set1) set2))))
+#+END_SRC
+
+As far as performance is concerned, adjoin-set's performace is reduced by removing the call
+to element-of?.  However, depending on how many duplicates are present in the set, the performance
+of element-of? and thus every operation that depends on it could be greatly impacted.
+
+Applications that perhaps did a lot of set adjoins where not too many duplicate elements would
+be included would work best, since element-of? wouldn't be called too often.  However, applications
+that performed lookups more often would probably want to go with a normal non-duplicate implementation.
+
+**** Exercise 2.61
